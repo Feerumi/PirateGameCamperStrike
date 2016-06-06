@@ -94,6 +94,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 117650938}
   - 212: {fileID: 117650937}
+  - 114: {fileID: 117650939}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -128,7 +129,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8014706, g: 0.44198745, b: 0.44198745, a: 1}
   m_FlipX: 0
   m_FlipY: 0
 --- !u!4 &117650938
@@ -140,9 +141,9 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 573.129, y: 229.127, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
+<<<<<<< HEAD
   m_RootOrder: 3
 --- !u!1 &121913191 stripped
 GameObject:
@@ -326,6 +327,20 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 61382054c0f46d24e9aeca411c08d2e8, type: 2}
   m_IsPrefabParent: 0
+=======
+  m_RootOrder: 1
+--- !u!114 &117650939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 117650936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4def7ad8e7bab49288a4fc3f98383465, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+>>>>>>> 14584adb8f78f16b1297c64754f1716c4ab1b82e
 --- !u!1 &1769016870
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,7 +424,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 574.09, y: 229.41, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
