@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class ResetLevel : MonoBehaviour {
 
@@ -11,6 +12,7 @@ public class ResetLevel : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(Input.GetKeyDown(KeyCode.R)){
+			//SceneManager.LoadScene ("MainMenu");
 			Application.LoadLevel("MainMenu");
 		}
 	}
