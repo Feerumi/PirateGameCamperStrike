@@ -5,6 +5,7 @@ public class EnemySpawner : MonoBehaviour {
 
 	public GameObject enemy;
 	float spawnInterval = 2f;
+	bool playerNotDead = true;
 
 	// Use this for initialization
 	void Start () {
@@ -24,7 +25,7 @@ public class EnemySpawner : MonoBehaviour {
 	}
 
 	IEnumerator SpawnEnemy() {
-		while (true) {
+		while (playerNotDead) {
 			yield return new WaitForSeconds (spawnInterval);
 			Instantiate (enemy, transform.position, transform.rotation);
 			ChangeIntervalTime ();

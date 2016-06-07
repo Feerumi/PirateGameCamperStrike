@@ -15,12 +15,10 @@ public class EnemyMovement : MonoBehaviour {
 
 	}
 
-	void OnCollisionEnter2D (Collision2D col)
-	{
-		Debug.Log (col.gameObject.tag);
-
-		if (col.gameObject.tag == "Player") {
-			Destroy (this.gameObject);
+	void OnTriggerEnter2D(Collider2D other) {
+		if (other.gameObject.tag.Equals("Player")) {
+			// TODO Delete when off screen.
+			//Destroy (this.gameObject);
 		}
 	}
 }
