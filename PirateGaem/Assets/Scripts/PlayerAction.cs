@@ -2,6 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 
+/**
+ * Governs  the action player can perform.
+ * 
+ * Namely hitting enemies.
+ */ 
 public class PlayerAction : MonoBehaviour, CollisionCallback.CollisionListener {
 
 	/**
@@ -26,6 +31,9 @@ public class PlayerAction : MonoBehaviour, CollisionCallback.CollisionListener {
 	 */
 	public float AttackRecharge;
 
+	/**
+	 * Area in which the enemies are destroyed upon player attack.
+	 */
 	private BoxCollider2D AttackHitBox;
 
 	void Start () {
@@ -48,28 +56,41 @@ public class PlayerAction : MonoBehaviour, CollisionCallback.CollisionListener {
 			} else {
 
 				// This abomination might start malfunctioning at some point!
+				// Individually destroy all the game objects within players reach,
 				foreach(GameObject gObject in collidingObjects) {
 					Destroy (gObject);
 				}
-
+					
 				collidingObjects.Clear();
 				AttackEnable ();
 			}
 		}
 	}
 
+	/**
+	 * Allows player to attack.
+	 */
 	private void AttackEnable() {
 		Attacking = false;
 	}
 
+	/**
+	 * Disables players ability to attack.
+	 */
 	private void AttackDisable() {
 		Attacking = true;
 	}
 
+	/**
+	 * Called when an enemy enters the players melee hitbox area.
+	 */
 	void CollisionCallback.CollisionListener.onCollisionEnter(Collider2D coll) {
 		collidingObjects.AddLast (coll.gameObject);
 	}
 
+	/**
+	 * Called when an enemy exits the players melee hitbox area.
+	 */
 	void CollisionCallback.CollisionListener.onCollisionExit(Collider2D coll) {
 		collidingObjects.Remove (coll.gameObject);
 	}
