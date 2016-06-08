@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class PropTextureLoader : MonoBehaviour {
 
-	public List<Texture2D> Props = new List<Texture2D>();
+	public List<Sprite> Props = new List<Sprite>();
 
 	// Use this for initialization
 	void Start () {
@@ -19,7 +19,7 @@ public class PropTextureLoader : MonoBehaviour {
 	/**
 	 * Fetches a single random entry from the loaded textures.
 	 */
-	public Texture2D getRandomTexture() {
+	public Sprite getRandomTexture() {
 		return Props [Random.Range (0, Props.Count)];
 	}
 }
