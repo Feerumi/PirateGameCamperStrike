@@ -15,11 +15,18 @@ public class CollisionCallback : MonoBehaviour {
 	
 	}
 
+	/**
+	 * Notifies the listener of a starting collision, if listener is present.
+	 */ 
 	void OnTriggerEnter2D(Collider2D other) {
 		if (listener != null)
 			listener.onCollisionEnter (other);
 	}
 
+
+	/**
+	 * Notifies the listener of an ending collision, if listener is present.
+	 */ 
 	void OnTriggerExit2D(Collider2D other) {
 		if (listener != null) 
 			listener.onCollisionExit (other);
@@ -29,6 +36,9 @@ public class CollisionCallback : MonoBehaviour {
 		this.listener = listener;
 	}
 
+	/**
+	 * Listener must implement this interface to recieve updates.
+	 */ 
 	public interface CollisionListener {
 		void onCollisionEnter(Collider2D coll);
 		void onCollisionExit(Collider2D coll);
