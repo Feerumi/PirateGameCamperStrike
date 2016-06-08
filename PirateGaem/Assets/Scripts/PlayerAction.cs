@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 /**
  * Governs  the action player can perform.
@@ -32,11 +33,20 @@ public class PlayerAction : MonoBehaviour, CollisionCallback.CollisionListener {
 	public float AttackRecharge;
 
 	/**
+	 * Image used to display remaining cooldown.
+	 */
+	public GameObject CooldownImage;
+
+	/**
 	 * Area in which the enemies are destroyed upon player attack.
 	 */
 	private BoxCollider2D AttackHitBox;
 
+	Image Image;
+
 	void Start () {
+		Image = CooldownImage.GetComponentInChildren<Image> ();
+		Image.fillAmount = 0;
 		collidingObjects = new LinkedList<GameObject>();
 		if (callback != null)
 			callback.setCollisionListener(this);
@@ -50,20 +60,24 @@ public class PlayerAction : MonoBehaviour, CollisionCallback.CollisionListener {
 			// If player misses the target, re-enable attacking after a delay.
 			if (collidingObjects.Count == 0) {
 				Invoke ("AttackEnable", AttackRecharge);
-
-			// If the attack hits a target, re-enable attack immediatly and
-			// remove damaged game objects.
+				Image.fillAmount = 1.0f;
+				// If the attack hits a target, re-enable attack immediatly and
+				// remove damaged game objects.
 			} else {
 
 				// This abomination might start malfunctioning at some point!
 				// Individually destroy all the game objects within players reach,
-				foreach(GameObject gObject in collidingObjects) {
+				foreach (GameObject gObject in collidingObjects) {
 					Destroy (gObject);
 				}
 					
-				collidingObjects.Clear();
+				collidingObjects.Clear ();
 				AttackEnable ();
 			}
+		} else if (Attacking) {
+			Image.fillAmount -= Time.deltaTime / AttackRecharge;
+		} else {
+			Image.fillAmount = 0;
 		}
 	}
 
