@@ -32,6 +32,8 @@ public class PlayerAction : MonoBehaviour, CollisionCallback.CollisionListener {
 	 */
 	public float AttackRecharge;
 
+	private Animator am;
+
 	/**
 	 * Image used to display remaining cooldown.
 	 */
@@ -46,6 +48,7 @@ public class PlayerAction : MonoBehaviour, CollisionCallback.CollisionListener {
 
 	void Start () {
 		Image = CooldownImage.GetComponentInChildren<Image> ();
+
 		Image.fillAmount = 0;
 		collidingObjects = new LinkedList<GameObject>();
 		if (callback != null)
@@ -54,6 +57,7 @@ public class PlayerAction : MonoBehaviour, CollisionCallback.CollisionListener {
 
 	void Update () {
 		if (Input.GetButtonDown ("PlayerAction") && !Attacking) {
+			Punch ();
 			AttackDisable ();
 			Debug.Log (collidingObjects.Count);
 
@@ -64,7 +68,6 @@ public class PlayerAction : MonoBehaviour, CollisionCallback.CollisionListener {
 				// If the attack hits a target, re-enable attack immediatly and
 				// remove damaged game objects.
 			} else {
-
 				// This abomination might start malfunctioning at some point!
 				// Individually destroy all the game objects within players reach,
 				foreach (GameObject gObject in collidingObjects) {
@@ -88,6 +91,10 @@ public class PlayerAction : MonoBehaviour, CollisionCallback.CollisionListener {
 		Attacking = false;
 	}
 
+	private void Punch() {
+		GetComponent<Animator> ().SetTrigger ("Punch");
+	}
+		
 	/**
 	 * Disables players ability to attack.
 	 */

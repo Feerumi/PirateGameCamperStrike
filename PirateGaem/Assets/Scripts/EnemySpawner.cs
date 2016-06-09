@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class EnemySpawner : MonoBehaviour {
 
-	public GameObject enemy;
+	public List<GameObject> enemies;
 	float spawnInterval = 2f;
 	bool playerNotDead = true;
 
@@ -27,7 +28,7 @@ public class EnemySpawner : MonoBehaviour {
 	IEnumerator SpawnEnemy() {
 		while (playerNotDead) {
 			yield return new WaitForSeconds (spawnInterval);
-			Instantiate (enemy, transform.position, transform.rotation);
+			Instantiate (enemies [Random.Range (0, enemies.Count)], transform.position, transform.rotation);
 			ChangeIntervalTime ();
 		}
 
