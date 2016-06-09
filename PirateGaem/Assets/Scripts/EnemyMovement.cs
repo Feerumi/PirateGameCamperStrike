@@ -5,6 +5,9 @@ public class EnemyMovement : MonoBehaviour {
 
 	float speed = -1;
 	// Use this for initialization
+
+	public PlayerAction player;
+
 	void Start () {
 
 	}
@@ -16,9 +19,13 @@ public class EnemyMovement : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
-		if (other.gameObject.tag.Equals("Player")) {
-			// TODO Delete when off screen.
-			//Destroy (this.gameObject);
-		}
+		if (other.tag == (player.tag))
+			player.inRange (this.gameObject);
+	}
+
+
+	void OnTriggerExit2D(Collider2D other) {
+		if (other.tag == (player.tag))
+			player.outOfRange (this.gameObject);
 	}
 }
