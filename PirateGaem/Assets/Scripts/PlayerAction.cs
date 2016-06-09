@@ -8,7 +8,7 @@ using UnityEngine.UI;
  * 
  * Namely hitting enemies.
  */ 
-public class PlayerAction : MonoBehaviour, CollisionCallback.CollisionListener {
+public class PlayerAction : MonoBehaviour {
 
 	/**
 	 * Is an attack currently in progress.
@@ -19,12 +19,7 @@ public class PlayerAction : MonoBehaviour, CollisionCallback.CollisionListener {
 	 * Contains a collection of objects currently residing within
 	 * melee hitbox.
 	 */
-	private LinkedList<GameObject> collidingObjects;
-
-	/**
-	 * Interface used to track objects overlapping with meleehitbox.
-	 */
-	public CollisionCallback callback;
+	private static List<GameObject> enemies;
 
 	/**
 	 * Attack recharge time in seconds. Only invoked when attack
@@ -50,19 +45,17 @@ public class PlayerAction : MonoBehaviour, CollisionCallback.CollisionListener {
 		Image = CooldownImage.GetComponentInChildren<Image> ();
 
 		Image.fillAmount = 0;
-		collidingObjects = new LinkedList<GameObject>();
-		if (callback != null)
-			callback.setCollisionListener(this);
+		enemies = new List<GameObject>();
 	}
 
 	void Update () {
 		if (Input.GetButtonDown ("PlayerAction") && !Attacking) {
 			Punch ();
 			AttackDisable ();
-			Debug.Log (collidingObjects.Count);
+			Debug.Log ("Hit:" + enemies.Count);
 
 			// If player misses the target, re-enable attacking after a delay.
-			if (collidingObjects.Count == 0) {
+			if (enemies.Count == 0) {
 				Invoke ("AttackEnable", AttackRecharge);
 				Image.fillAmount = 1.0f;
 				// If the attack hits a target, re-enable attack immediatly and
@@ -70,11 +63,11 @@ public class PlayerAction : MonoBehaviour, CollisionCallback.CollisionListener {
 			} else {
 				// This abomination might start malfunctioning at some point!
 				// Individually destroy all the game objects within players reach,
-				foreach (GameObject gObject in collidingObjects) {
+				foreach (GameObject gObject in enemies) {
 					Destroy (gObject);
 				}
 					
-				collidingObjects.Clear ();
+				enemies.Clear ();
 				AttackEnable ();
 			}
 		} else if (Attacking) {
@@ -102,17 +95,13 @@ public class PlayerAction : MonoBehaviour, CollisionCallback.CollisionListener {
 		Attacking = true;
 	}
 
-	/**
-	 * Called when an enemy enters the players melee hitbox area.
-	 */
-	void CollisionCallback.CollisionListener.onCollisionEnter(Collider2D coll) {
-		collidingObjects.AddLast (coll.gameObject);
+	public void inRange(GameObject obj) {
+		enemies.Add (obj);
+		Debug.Log ("inRange:" + enemies.Count);
 	}
 
-	/**
-	 * Called when an enemy exits the players melee hitbox area.
-	 */
-	void CollisionCallback.CollisionListener.onCollisionExit(Collider2D coll) {
-		collidingObjects.Remove (coll.gameObject);
+	public void outOfRange(GameObject obj) {
+		enemies.Remove (obj);
+		Debug.Log ("outOfRange" + enemies.Count);
 	}
 }

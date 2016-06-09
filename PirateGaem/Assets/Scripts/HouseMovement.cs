@@ -4,7 +4,6 @@ using System.Collections;
 public class HouseMovement : MonoBehaviour {
 
 	public float speed;
-	private bool moving = true;
 
 	// Use this for initialization
 	void Start () {
@@ -13,11 +12,7 @@ public class HouseMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (moving)
-			this.transform.Translate(new Vector3(Time.deltaTime * speed, 0,0));
-	}
-
-	public void setMoving(bool moving) {
-		this.moving = moving;
+		// Move the house equal to the determined speed along the X axis.
+		this.transform.Translate(new Vector3(Time.deltaTime * speed, 0,0));
 	}
 }

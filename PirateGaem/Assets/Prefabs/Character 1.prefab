@@ -22,23 +22,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &172680
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 496674}
-  - 61: {fileID: 6176880}
-  - 114: {fileID: 11420476}
-  m_Layer: 0
-  m_Name: MeleeHitbox
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!4 &481646
 Transform:
   m_ObjectHideFlags: 1
@@ -46,23 +29,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 127720}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 572.552, y: 228.851, z: -1}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0}
-  m_Children:
-  - {fileID: 496674}
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
---- !u!4 &496674
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 172680}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 572.647, y: 229.02, z: -3}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0}
   m_Children: []
-  m_Father: {fileID: 481646}
+  m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!50 &5071756
 Rigidbody2D:
@@ -92,23 +62,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_Offset: {x: 0.059509277, y: -0.0066375732}
+  m_Offset: {x: 1.3317871, y: -0.0066121416}
   serializedVersion: 2
-  m_Size: {x: 1.7668468, y: 3.8738089}
---- !u!61 &6176880
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 172680}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: 0.81, y: 0}
-  serializedVersion: 2
-  m_Size: {x: 1.96, y: 3.82}
+  m_Size: {x: 2.8385658, y: 3.873809}
 --- !u!95 &9558854
 Animator:
   serializedVersion: 3
@@ -126,17 +82,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &11420476
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 172680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 574d045f213cd154aaf29f86f5db4c05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11434722
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -148,8 +93,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74403069ae711be48b664c3408c3ec26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  callback: {fileID: 11420476}
   AttackRecharge: 2
+  CooldownImage: {fileID: 0}
 --- !u!114 &11488524
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -172,7 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c42063c451dc678449a2195059878c6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hitpoints: 10
+  Hitpoints: -1756
 --- !u!212 &21262970
 SpriteRenderer:
   m_ObjectHideFlags: 1
