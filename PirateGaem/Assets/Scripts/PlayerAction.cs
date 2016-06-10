@@ -82,7 +82,7 @@ public class PlayerAction : MonoBehaviour {
 				// remove damaged game objects.
 			} else {
 				// This abomination might start malfunctioning at some point!
-				// Individually destroy all the game objects within players reach,
+				// Individually destroy all the game objects within players reach.
 				foreach (GameObject gObject in enemies) {
 					Destroy (gObject);
 					calculateRum (1);
