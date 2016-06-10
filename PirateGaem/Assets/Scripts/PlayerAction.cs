@@ -16,6 +16,16 @@ public class PlayerAction : MonoBehaviour {
 	private bool Attacking = false;
 
 	/**
+	 * Amount of points in score text
+	 */
+	private float scorePoints;
+
+	/**
+	 * Chance to get more rum
+	 */
+	private float chanceOfRum = 10;
+
+	/**
 	 * Contains a collection of objects currently residing within
 	 * melee hitbox.
 	 */
@@ -26,6 +36,16 @@ public class PlayerAction : MonoBehaviour {
 	 * is missed.
 	 */
 	public float AttackRecharge;
+
+	/**
+	 * UI Score text
+	 */
+	public Text ScoreText;
+
+	/**
+	 * UI Rum bottle
+	 */
+	public RumLevel rumBottle;
 
 	private Animator am;
 
@@ -52,12 +72,12 @@ public class PlayerAction : MonoBehaviour {
 		if (Input.GetButtonDown ("PlayerAction") && !Attacking) {
 			Punch ();
 			AttackDisable ();
-			Debug.Log ("Hit:" + enemies.Count);
 
 			// If player misses the target, re-enable attacking after a delay.
 			if (enemies.Count == 0) {
 				Invoke ("AttackEnable", AttackRecharge);
 				Image.fillAmount = 1.0f;
+				calculateRum (-1);
 				// If the attack hits a target, re-enable attack immediatly and
 				// remove damaged game objects.
 			} else {
@@ -65,10 +85,13 @@ public class PlayerAction : MonoBehaviour {
 				// Individually destroy all the game objects within players reach,
 				foreach (GameObject gObject in enemies) {
 					Destroy (gObject);
+					calculateRum (1);
 				}
-					
+
+				scorePoints += enemies.Count;
 				enemies.Clear ();
 				AttackEnable ();
+				ScoreText.text = "" + scorePoints;
 			}
 		} else if (Attacking) {
 			Image.fillAmount -= Time.deltaTime / AttackRecharge;
@@ -95,13 +118,27 @@ public class PlayerAction : MonoBehaviour {
 		Attacking = true;
 	}
 
+	private void calculateRum(int amount){
+
+		switch(amount){
+
+		case 1:
+			float random = Random.Range (0, 100);
+			if (random > 100 - chanceOfRum) {
+				rumBottle.addRum ();
+			}
+			break;
+		case -1:
+			rumBottle.subtractRum ();
+			break;
+		}
+	}
+
 	public void inRange(GameObject obj) {
 		enemies.Add (obj);
-		Debug.Log ("inRange:" + enemies.Count);
 	}
 
 	public void outOfRange(GameObject obj) {
 		enemies.Remove (obj);
-		Debug.Log ("outOfRange" + enemies.Count);
 	}
 }
