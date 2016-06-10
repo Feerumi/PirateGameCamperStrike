@@ -4,7 +4,7 @@ using System.Collections;
 
 public class RumLevel : MonoBehaviour {
 	
-	int rumLevel = 0;
+	int rumLevel = 5;
 	int minRum = 0;
 	int maxRum = 5;
 	public Sprite[] sprites;
@@ -14,12 +14,20 @@ public class RumLevel : MonoBehaviour {
 		currentSprite = (Sprite) gameObject.GetComponent<Image>().sprite;
 	}
 
+	public void Update(){
+
+		if (rumLevel == 0) {
+
+			Application.LoadLevel ("gameover");
+
+		}
+
+	}
+
 	void rumInLimits(int amount){
 				
 		if ((minRum <= (rumLevel + amount)) && ((rumLevel + amount) <= maxRum)) {
-			Debug.Log ("Old rum " + rumLevel); 
 			rumLevel += amount;
-			Debug.Log ("New rum " + rumLevel);
 			currentSprite = sprites[rumLevel];
 			gameObject.GetComponent<Image>().sprite = currentSprite;
 		}
