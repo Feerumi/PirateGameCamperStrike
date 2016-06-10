@@ -3,13 +3,16 @@ using System.Collections;
 
 public class EnemyMovement : MonoBehaviour {
 
-	float speed = -1;
-	// Use this for initialization
+	private float minSpeed = -0.3f;
 
+	private float maxSpeed = -1.1f;
+
+	private float speed;
 	public PlayerAction player;
 
+	// Use this for initialization
 	void Start () {
-
+		speed = (float) (Random.Range (minSpeed, maxSpeed));
 	}
 	
 	// Update is called once per frame

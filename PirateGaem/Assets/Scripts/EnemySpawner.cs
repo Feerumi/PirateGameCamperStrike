@@ -7,6 +7,7 @@ public class EnemySpawner : MonoBehaviour {
 	public List<GameObject> enemies;
 	float spawnInterval = 2f;
 	bool playerNotDead = true;
+	float minInterval = 0.4f;
 
 	// Use this for initialization
 	void Start () {
@@ -14,9 +15,9 @@ public class EnemySpawner : MonoBehaviour {
 	}
 
 	public void ChangeIntervalTime() {
-		if (spawnInterval >= 0.2f) 
+		if (spawnInterval >= minInterval) 
 		{
-			spawnInterval *= 0.8f;
+			spawnInterval *= 0.95f;
 		}
 	}
 	
